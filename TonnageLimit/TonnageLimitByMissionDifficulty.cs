@@ -158,8 +158,8 @@ namespace TonnageLimitByMissionDifficulty
 
 		public static int GetTonnageLimit(int difficulty)
 		{
-			//no settings, allow max tonnage.
-			if (settings.tonnageByDifficulty.Count() == 0)
+			//no settings or invalid difficulty, allow max tonnage.
+			if (difficulty <= 0 || settings.tonnageByDifficulty.Count() == 0)
 				return 400;
 
 			//in valid settings range.
