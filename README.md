@@ -1,15 +1,18 @@
 # TonnageLimitByMissionDifficulty
-Battletech mod to constrain the players drop tonnage to match the difficulty rating of the mission.
+A Battletech mod to limit the players drop tonnage to match the difficulty rating of the current contract.
 
-Higher difficulty missions allow the player to deploy a greater drop tonnage of mechs.
+This mod is inteded to encourage the player to maintain a greater variety of mechs in their mech bay during the early and mid game. 
 
-This mod is inteded to encourage the player to maintain a greater variety of mechs in their mech bay during the early and mid game in order to construct effective lances for each of the tonnage brackets.
+Drop tonnage limits scaled to mission difficulty help to ensure that each battle is reasonably challenging, and the constraints imposed by only being able to bring a limited amount of resources puts more pressure on the player to construct optimized lances that contain a mix of weight classes and specializations.
+
 
 Based off of **Mpstarks** **LeopardDropLimit**
 
 ## Installation
 
-Install BTML and ModTek. Extract files to BATTLETECH\Mods\TonnageLimitByMissionDifficulty
+Install [BTML](https://github.com/Mpstark/BattleTechModLoader) and [ModTek](https://github.com/Mpstark/ModTek) if you haven't already.
+
+Extract the files from TonnageLimitByMissionDifficulty.zip to BATTLETECH\Mods\TonnageLimitByMissionDifficulty
 
 ## Configuration
 
