@@ -62,7 +62,9 @@ namespace TonnageLimitByMissionDifficulty
                 return;
 
             int difficulty = __instance.activeContract.Difficulty;
-			int tonnageLimit = TonnageLimitByMissionDifficulty.GetTonnageLimit(difficulty);
+			int tonnageLimit = 0;
+			if (!TonnageLimitByMissionDifficulty.GetTonnageLimit(difficulty, out tonnageLimit))
+				return;
 
 			float lanceTonnage = 0;
 			List<MechDef> mechs = TonnageLimitByMissionDifficulty.GetMechDefs(__instance);
@@ -101,7 +103,9 @@ namespace TonnageLimitByMissionDifficulty
 				return;
 
 			int difficulty = activeContract.Difficulty;
-			int tonnageLimit = TonnageLimitByMissionDifficulty.GetTonnageLimit(difficulty);
+			int tonnageLimit = 0;
+			if(!TonnageLimitByMissionDifficulty.GetTonnageLimit(difficulty, out tonnageLimit))
+				return;
 
 			float lanceTonnage = 0;
 			foreach (MechDef mech in mechs)
@@ -125,7 +129,7 @@ namespace TonnageLimitByMissionDifficulty
 
 		public static void Init(string directory, string settingsJSON)
 		{
-			var harmony = HarmonyInstance.Create("GlenoJacks.TonnageLimitByMissionDifficulty");
+			var harmony = HarmonyInstance.Create("com.github.glenojacks.TonnageLimitByMissionDifficulty");
 			harmony.PatchAll(Assembly.GetExecutingAssembly());
 
 			// read settings
@@ -156,18 +160,26 @@ namespace TonnageLimitByMissionDifficulty
 		}
 		
 
-		public static int GetTonnageLimit(int difficulty)
+		public static bool GetTonnageLimit(int difficulty, out int tonnageLimit)
 		{
-			//no settings or invalid difficulty, allow max tonnage.
+			tonnageLimit = 0;
+
+			//no settings or invalid difficulty.
 			if (difficulty <= 0 || settings.tonnageByDifficulty.Count() == 0)
-				return 400;
+			{
+				return false;
+			}
 
 			//in valid settings range.
 			if (difficulty <= settings.tonnageByDifficulty.Count())
-				return settings.tonnageByDifficulty[difficulty - 1];
+			{
+				tonnageLimit = settings.tonnageByDifficulty[difficulty - 1];
+				return true;
+			}
 
 			//beyond the range of settings
-			return settings.tonnageByDifficulty.Last();
+			tonnageLimit = settings.tonnageByDifficulty.Last();
+			return true;
 		}
 	}
 }
